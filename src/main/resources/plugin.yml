@@ -1,0 +1,10 @@
+name: 'monkeModMail'
+main: 'online.monkegame.monkemodmail.Main'
+version: '1.0'
+api-version: '1.17'
+author: 'monkegame'
+commands:
+  report:
+    description: 'reports a player'
+    usage: '/report <player> <reason>'
+    permission: 'monkemodmail.report'

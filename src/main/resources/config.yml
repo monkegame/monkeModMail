@@ -1,0 +1,15 @@
+# Hey! Thanks for using monkeModMail!
+# Below you can configure the plugin.
+# If you need any help, head over to https://monkegame.online/contact
+# If something's really wrong, create an issue on GitHub (https://github.com/monkegame/monkemodmail)
+
+discord-bot-token:
+
+# Set these through commands, or input these values manually. These are related to Discord.
+logging-channel:
+prefix: "!"
+access-role:
+
+# The height of the suspicion level before someone gets automatically banned. Keep this above 20, just to be safe.
+suspicion-threshold: 10
+
