@@ -2,14 +2,22 @@
 # Below you can configure the plugin.
 # If you need any help, head over to https://monkegame.online/contact
 # If something's really wrong, create an issue on GitHub (https://github.com/monkegame/monkemodmail)
-
-discord-bot-token:
-
-# Set these through commands, or input these values manually. These are related to Discord.
-logging-channel:
-prefix: "!"
-access-role:
-
-# The height of the suspicion level before someone gets automatically banned. Keep this above 20, just to be safe.
-suspicion-threshold: 10
-
+# Cooldowns are in seconds.
+# But how do the report reasons work????
+# Put what you think are the worst offences lower on the list.
+# The way the system works, is that it weighs it in more, the farther down on the list.
+# You can even add your own!
+discord:
+  bot-token: ""
+  logging-channel: ""
+  bot-prefix: "!"
+  access-role: ""
+command-cooldowns:
+  report-cooldown: 30
+  modmail-cooldown: 30
+report-reasons:
+  - "Griefing"
+  - "Scam"
+  - "Rude to me or others"
+  - "Hacking/abusing exploits"
+  - ""
