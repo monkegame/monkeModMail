@@ -1,7 +1,12 @@
+![](https://naomi.s-ul.eu/FW3TjVLU)
 # monkeModMail
-mod mail plugin with trust system and discord connected logging!
+player reporting plugin with trust system and discord connected logging!
 
+### features
+- report command with customizable report categories!
+- trust system!
+- SQLite backend to store reports!
 
-## configuration/setup
+### configuration/setup
 
 check the wiki :)
