@@ -1,4 +1,4 @@
-![](https://naomi.s-ul.eu/FW3TjVLU)
+![](https://naomi.s-ul.eu/GAYeJ2sJ)
 # monkeModMail
 player reporting plugin with trust system and discord connected logging!
 
