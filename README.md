@@ -11,4 +11,4 @@ player reporting plugin with trust system and discord connected logging!
 
 ### configuration/setup
 
-check the wiki :)
+check the [wiki](https://github.com/monkegame/monkeModMail/wiki/Config) :)
