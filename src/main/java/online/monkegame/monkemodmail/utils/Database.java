@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 public class Database {
 
+    //ugliest string i've ever written - Mrs_Herobrine_
     public String path = System.getProperty("user.dir") + System.getProperty("file.separator") + "plugins" + System.getProperty("file.separator") + "monkeModMail" +  System.getProperty("file.separator");
 
     String reportsTable =
@@ -66,11 +67,10 @@ public class Database {
     public int countReports() {
         AtomicInteger amount = new AtomicInteger();
         BukkitScheduler b = Bukkit.getScheduler();
-        b.runTaskAsynchronously(plugin, () -> {
-
+        b.runTaskAsynchronously(plugin, ()-> {
             String amountOfReports =
                     "SELECT COUNT(reason) AS reports " +
-                    "FROM reports;";
+                            "FROM reports;";
             try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + path + "files.db");
                  Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(amountOfReports);
@@ -81,18 +81,18 @@ public class Database {
                 e.printStackTrace();
             }
         });
-        return amount.get() +1;
+        return amount.get()+1;
     }
 
+    //gets the amount of times a player has been reported
     public int countReportsPerPlayer(String uuid) {
         AtomicInteger amount = new AtomicInteger();
         BukkitScheduler b = Bukkit.getScheduler();
-        b.runTaskAsynchronously(plugin, () -> {
-
+        b.runTaskAsynchronously(plugin, ()-> {
             String amountOfReports =
                     "SELECT COUNT(reason) AS reports " +
-                    "FROM reports " +
-                    "WHERE uuid='"+uuid+"';";
+                            "FROM reports " +
+                            "WHERE uuid='" + uuid + "';";
             try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + path + "files.db");
                  Statement stmt = conn.createStatement()) {
                 ResultSet rs = stmt.executeQuery(amountOfReports);
@@ -103,7 +103,7 @@ public class Database {
                 e.printStackTrace();
             }
         });
-        return amount.get() +1;
+        return amount.get()+1;
     }
 
 }

@@ -14,20 +14,19 @@ import java.util.List;
 
 public class PlayerboundMessages {
 
-    private final ColorGenerator CG;
     public Main m;
 
     public PlayerboundMessages(Main plugin) {
         this.m = plugin;
-        this.CG = new ColorGenerator();
     }
 
+    //sends the report categories and the IDs you can use
     public void sendReasons(CommandSender s, List<String> l) {
 
         BukkitScheduler b = Bukkit.getScheduler();
         b.runTaskAsynchronously(m, ()-> {
             TextComponent c = Component.text()
-                    .content("Valid reasons:")
+                    .content("Valid categories:")
                     .color(NamedTextColor.RED)
                     .decoration(TextDecoration.ITALIC, false).build();
             s.sendMessage(c);

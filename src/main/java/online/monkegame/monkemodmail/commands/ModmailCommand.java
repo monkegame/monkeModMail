@@ -30,11 +30,10 @@ public class ModmailCommand implements CommandExecutor {
         this.g = new ColorGenerator();
     }
 
-
     Map<String, Short> cooldowns = new HashMap<>();
 
     @Override
-    public boolean onCommand(CommandSender s, Command n, String y, String[] args) {
+    public boolean onCommand(CommandSender s, Command c, String commandName, String[] args) {
         int cooldownTime = conf.getInt("command-cooldowns.modmail-cooldown");
         if (!(s instanceof Player)) {
             return false;
@@ -57,7 +56,7 @@ public class ModmailCommand implements CommandExecutor {
                     .setColor(g.randomColor())
                     .build();
             cooldowns.put(s.getName(), (short) (Instant.now().toEpochMilli()/1000));
-            ch.sendMessageEmbeds(hlepPls).submit();
+            ch.sendMessageEmbeds(hlepPls).queue();
             return true;
         }
     }

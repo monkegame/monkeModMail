@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SuspicionLevel {
@@ -17,12 +18,11 @@ public class SuspicionLevel {
         this.db = new Database(plugin);
     }
 
-        //similar reports +
-        //amount of reports ++
-        //playtime ~
     Float output;
     public String checkSuspicion(String uuid, Player p) {
-
+        int reports = db.countReports();
+        //gets the report weights from the database
+        //this list will hold them before they're converted to an array
         List<Integer> a = new ArrayList<>();
         String reportType =
                 "SELECT reason " +
@@ -32,25 +32,25 @@ public class SuspicionLevel {
              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(reportType);
             while (rs.next()) {
+                //adds report weights to the list
                 a.add(rs.getInt("reason"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         Object[] similarReports = a.toArray();
-
+        //clunky conversion but it works
         int values = 0;
         int size = similarReports.length;
         for (Object o : similarReports) {
-            values = values + (Integer.parseInt(o.toString()));
+            values = values + (int) o;
         }
 
-        float averageReport = (values * 0.7f) / size;
-        int reports = db.countReports();
+        //this bit does the magic calculation stuff
+        float averageReport = (values) / size;
         int playtime = p.getPlayer().getStatistic(Statistic.PLAY_ONE_MINUTE) / 7200;
         output = (Float)((float)(averageReport * (reports * 0.37f) - Math.pow(0.01 * playtime, 1.12)+1));
-
+        //and returns it
         if (output <= 0 || output.isNaN()) {
             return "Distrust too low to make a judgement!";
         } else if (output >10) {

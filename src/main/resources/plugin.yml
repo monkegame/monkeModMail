@@ -1,8 +1,9 @@
 name: 'monkeModMail'
 main: 'online.monkegame.monkemodmail.Main'
-version: '1.0'
+version: '1.1'
 api-version: '1.17'
 author: 'Mrs_Herobrine_'
+website: 'github.com/monkegame/monkemodmail'
 commands:
   report:
     description: 'reports a player'

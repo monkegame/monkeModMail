@@ -1,5 +1,6 @@
 package online.monkegame.monkemodmail;
 
+import net.dv8tion.jda.api.Permission;
 import online.monkegame.monkemodmail.utils.ColorGenerator;
 import online.monkegame.monkemodmail.utils.Database;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -35,72 +36,77 @@ public class DiscordHandler extends ListenerAdapter {
         String p = c.getString("discord.bot-prefix");
         Member am = event.getMember();
         g = event.getGuild();
-        Role ro = g.getRoles().stream().filter(r -> r.getName().equalsIgnoreCase(c.getString("access-role"))).findFirst().orElse(null);
-        if (m.startsWith(p) && !a.isBot() && Objects.requireNonNull(am).getRoles().contains(ro)) {
+        if (m.startsWith(p) && !a.isBot() && Objects.requireNonNull(am).hasPermission(Permission.MESSAGE_MANAGE)) {
             String[] co = m.substring(p.length()).split(" ");
             switch (co[0]) {
 
                 case "log":
                     if (co.length>1) {
-                        switch (co[1]) {
-                            case "channel":
-                                try {
-                                    String channel = co[2];
-                                    if (!channel.contains("<")) {
-                                        c.set("logging-channel", channel);
-                                    } else {
-                                        channel.replaceAll("<#>", "");
-                                        c.set("logging-channel", channel);
-                                    }
-                                } catch (IndexOutOfBoundsException e) {
-                                    ch.sendMessage("Please specify a channel ID!").submit();
-                                    break;
+                        if ("channel".equals(co[1])) {
+                            try {
+                                String channel = co[2];
+                                if (!channel.contains("<")) {
+                                    c.set("discord.logging-channel", channel);
+                                } else {
+                                    channel.replaceAll("<#>", "");
+                                    c.set("discord.logging-channel", channel);
                                 }
-                                ch.sendMessage("Channel set successfully! Please restart the server to apply the changes!").submit();
+                            } catch (IndexOutOfBoundsException e) {
+                                ch.sendMessage("Please specify a channel ID!").queue();
                                 break;
-                            case "settings":
-                                MessageEmbed lSE = new EmbedBuilder()
-                                        .setTitle("Logging Settings")
-                                        .addField("Logging channel", "<#" + c.getString("logging-channel").replace("\"", "") + ">", false)
-                                        .addField("Settings role", c.getString("access-role"), false)
-                                        .setColor(0x08adf4)
-                                        .build();
-                                ch.sendMessageEmbeds(lSE).submit();
-                                break;
-                            case "role":
-                                try {
-                                    if (c.contains("@")) {
-                                        ch.sendMessage("Please specify the role's name instead of pinging it!").submit();
-                                        break;
-                                    }
-                                    c.set("role", co[2]);
-                                } catch (IndexOutOfBoundsException e) {
-                                    ch.sendMessage("Please specify a role's name!").submit();
-                                    break;
-                                }
-                                ch.sendMessage("Role set successfully! Please restart the server to apply the changes!").submit();
-                                break;
-                            default:
-                                ch.sendMessage("Unknown command!").submit();
-                                break;
+                            }
+                            ch.sendMessage("Channel set successfully! Please restart the server to apply the changes!").queue();
+                        } else {
+                            ch.sendMessage("Unknown command!").queue();
                         }
-                    } else {
-                        ch.sendMessage(p + "log role/channel/settings").submit();
                     }
                     break;
+                case "modmail":
+                    if (co.length>1) {
+                        if ("channel".equals(co[1])) {
+                            try {
+                                String channel = co[2];
+                                if (!channel.contains("<")) {
+                                    c.set("discord.modmail-channel", channel);
+                                } else {
+                                    channel.replaceAll("<#>", "");
+                                    c.set("discord.modmail-channel", channel);
+                                }
+                            } catch (IndexOutOfBoundsException e) {
+                                ch.sendMessage("Please specify a channel ID!").queue();
+                                break;
+                            }
+                            ch.sendMessage("Channel set successfully! Please restart the server to apply the changes!").queue();
+                        } else {
+                            ch.sendMessage("Unknown command!").queue();
+                        }
+                    }
+                    break;
+                case "settings":
+                    MessageEmbed settings = new EmbedBuilder()
+                        .setTitle("Current settings")
+                        .addField("Logging channel","<#" + c.getString("discord.logging-channel").replace("\"", "") + ">", false)
+                        .addField("Modmail channel","<#" + c.getString("discord.modmail-channel").replace("\"", "") + ">", false)
+                        .setColor(0x18fa91)
+                        .build();
+                    ch.sendMessageEmbeds(settings).queue();
+                    break;
                 case "help":
-                    MessageEmbed ca = new EmbedBuilder()
+                    MessageEmbed hlep = new EmbedBuilder()
                             .setTitle("Help! What commands are there?")
-                            .addField("log", "-``settings`` -> shows settings\n-``channel <channel>`` -> sets the channel where things will be logged\n-``role <nameOfRole>`` -> sets the role that can edit the settings",false)
+                            .addField("log", "-``channel <channel>`` -> sets the channel where reports will be logged",false)
+                            .addField("modmail", "-``channel <channel>`` -> sets the channel where modmails will be sent", false)
+                            .addField("setttings", "shows the current settings", false)
                             .setColor(cg.randomColor())
                             .build();
-                    ch.sendMessageEmbeds(ca).submit();
+                    ch.sendMessageEmbeds(hlep).queue();
+                    break;
                 default:
-                    ch.sendMessage("Unknown command!").submit();
+                    ch.sendMessage("Unknown command!").queue();
                     break;
             }
         } else if (m.startsWith(p) && !a.isBot()) {
-            ch.sendMessage("You don't have permission to run the command!").submit();
+            ch.sendMessage("You don't have permission to run the command!").queue();
         }
     }
 

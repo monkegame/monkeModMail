@@ -34,6 +34,7 @@ public class Main extends JavaPlugin {
         getLogger().info("| '  \\/ _ \\ ' \\| / / -_) |\\/| / _ \\/ _` | |\\/| / _` | | |");
         getLogger().info("|_|_|_\\___/_||_|_\\_\\___|_|  |_\\___/\\__,_|_|  |_\\__,_|_|_|");
         getLogger().info("---------------------------------------------------------");
+        getLogger().info("Made by Mrs_Herobrine_");
         try {
             j = JDABuilder.createLight(getConfig().getString("discord.bot-token"), GatewayIntent.GUILD_MESSAGES)
                     .addEventListeners(new DiscordHandler(configuration, main))
@@ -61,8 +62,11 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         if (j!=null) {
             j.shutdown();
+            getLogger().info("Shutting down Discord connection...");
         }
+        getLogger().info("Saving config...");
         saveConfig();
+        getLogger().info("Done! See you next time!");
     }
 
 }

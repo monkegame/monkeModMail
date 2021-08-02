@@ -10,8 +10,8 @@
 discord:
   bot-token: ""
   logging-channel: ""
+  modmail-channel: ""
   bot-prefix: "!"
-  access-role: ""
 command-cooldowns:
   report-cooldown: 30
   modmail-cooldown: 30
