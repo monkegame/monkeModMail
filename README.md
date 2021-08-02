@@ -1,6 +1,6 @@
 ![](https://naomi.s-ul.eu/GAYeJ2sJ)
 # monkeModMail
-player reporting plugin with trust system and discord connected logging!
+discord attached reporting plugin with trust system!
 
 ![](https://img.shields.io/github/downloads/monkegame/monkemodmail/total?style=for-the-badge)
 
@@ -8,6 +8,7 @@ player reporting plugin with trust system and discord connected logging!
 - report command with customizable report categories!
 - trust system!
 - SQLite backend to store reports!
+- simple modmail command
 
 ### configuration/setup
 
