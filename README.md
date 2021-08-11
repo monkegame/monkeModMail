@@ -12,4 +12,6 @@ discord attached reporting plugin with trust system!
 
 ### configuration/setup
 
+#### PLEASE DO NOT USE /reload WHILE USING THIS PLUGIN! IT WILL BREAK!
+
 check the [wiki](https://github.com/monkegame/monkeModMail/wiki/Config) :)
