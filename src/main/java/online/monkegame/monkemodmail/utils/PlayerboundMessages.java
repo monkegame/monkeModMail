@@ -21,16 +21,16 @@ public class PlayerboundMessages {
     }
 
     //sends the report categories and the IDs you can use
-    public void sendReasons(CommandSender s, List<String> l) {
+    public void sendReasons(CommandSender s, List<Object> l) {
 
         BukkitScheduler b = Bukkit.getScheduler();
         b.runTaskAsynchronously(m, ()-> {
             TextComponent c = Component.text()
-                    .content("Valid categories:")
+                    .content("Valid reasons:")
                     .color(NamedTextColor.RED)
                     .decoration(TextDecoration.ITALIC, false).build();
             s.sendMessage(c);
-            for (String a : l) {
+            for (Object a : l) {
                 s.sendMessage(Component.text((l.indexOf(a) + 1) + ": " + a).decoration(TextDecoration.ITALIC, false).color(NamedTextColor.YELLOW));
             }
         });

@@ -26,7 +26,10 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        saveDefaultConfig();
+        if (!getDataFolder().exists()) {
+            saveDefaultConfig();
+        }
+
         configuration = getConfig();
         getLogger().info("Config loaded!");
         getLogger().info("                _       __  __         _ __  __      _ _");

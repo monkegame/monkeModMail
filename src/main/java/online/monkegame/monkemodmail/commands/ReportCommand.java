@@ -50,7 +50,7 @@ public class ReportCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender s, Command c, String a, String[] args) {
         int cooldownTime = co.getInt("command-cooldowns.report-cooldown");
-        List<String> l = getReasons(co);
+        List<Object> l = getReasons(co);
         if (s instanceof Player && args != null && !s.getName().equals(args[0])) {
             MessageChannel ch = j.getTextChannelById(co.getString("discord.logging-channel"));
             long secondsLeft = 0;
@@ -108,12 +108,9 @@ public class ReportCommand implements CommandExecutor {
     }
 
     //gets the report categories from the configuration file
-    public List<String> getReasons(FileConfiguration conf) {
+    public List<Object> getReasons(FileConfiguration conf) {
 
-        List<String> l = new ArrayList<>();
-        for (Object r : conf.getList("report-reasons")) {
-            l.add((String) r);
-        }
-        return l;
+        return new ArrayList<>(conf.getList("report-reasons"));
+
     }
 }
