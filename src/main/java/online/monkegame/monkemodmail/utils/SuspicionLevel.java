@@ -47,6 +47,9 @@ public class SuspicionLevel {
         }
 
         //this bit does the magic calculation stuff
+        if (size == 0 || values == 0 ) {
+            return "Distrust too low to make a judgement!";
+        }
         float averageReport = (values) / size;
         int playtime = p.getPlayer().getStatistic(Statistic.PLAY_ONE_MINUTE) / 7200;
         output = (Float)((float)(averageReport * (reports * 0.37f) - Math.pow(0.01 * playtime, 1.12)+1));
